@@ -25,23 +25,26 @@ public class GestionnaireCompteBancaire {
     private EntityManager em;
 
     public void creerCompteBancaireDeTest() {
-        creeCompteBancaire("John", "Lennon", "0001", 1111);
-        creeCompteBancaire("Paul", "Mac Cartney", "0002", 2222);
-        creeCompteBancaire("Ringo", "Starr", "0003", 3333);
-        creeCompteBancaire("Georges", "Harisson", "0004", 4444);
+        creeCompteBancaire(10000, "X001", "Lennon", "John");
+        creeCompteBancaire(100, "X002", "Mac Cartney", "Paul");
+        creeCompteBancaire(4000, "X003", "Starr", "Ringo");
+        creeCompteBancaire(0, "X004", "Harisson", "Georges");
     }
+//final double balance, final String accountNumber, final String lastname, final String firstname
 
-    public CompteBancaire creeCompteBancaire(String nom, String prenom, String accountNumber, double balance) {
-        CompteBancaire u = new CompteBancaire( nom,  prenom, accountNumber,  balance);
+    public CompteBancaire creeCompteBancaire(double balance, String accountNumber, String lastname, String firstname) {
+        CompteBancaire u = new CompteBancaire(balance, accountNumber, lastname, firstname);
         em.persist(u);
         return u;
     }
+      
 
-    public Collection<CompteBancaire> getAllUsers() {
+    public Collection<CompteBancaire> getAllCompteBancaire() {
         // Exécution d'une requête équivalente à un select *
         Query q = em.createQuery("select u from CompteBancaire u");
         return q.getResultList();
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
+    
+
 }
