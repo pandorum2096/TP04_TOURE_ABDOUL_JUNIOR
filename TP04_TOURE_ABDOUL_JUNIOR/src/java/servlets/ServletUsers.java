@@ -65,7 +65,7 @@ public class ServletUsers extends HttpServlet {
                     String lastname = request.getParameter("lastname");
                     String balance = request.getParameter("balance");
                     String accountNumber = request.getParameter("accountNumber");
-                    gestionnaireCompteBancaire.creeCompteBancaire(Double.parseDouble(balance), accountNumber, lastname, firstname);
+                    gestionnaireCompteBancaire.creeCompteBancaire(Double.parseDouble(balance), accountNumber, firstname, lastname);
                     Collection<CompteBancaire> liste = gestionnaireCompteBancaire.getAllCompteBancaire();
                     request.setAttribute("listeDesUsers", liste);
                     forwardTo = "listAccount.jsp?action=listerLesUtilisateurs";
@@ -73,7 +73,7 @@ public class ServletUsers extends HttpServlet {
                     break;
                 }
                 default:
-                    forwardTo = "index.jsp?action=todo";
+                    forwardTo = "listAccount.jsp?action=listerLesUtilisateurs";
                     message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";
                     break;
             }

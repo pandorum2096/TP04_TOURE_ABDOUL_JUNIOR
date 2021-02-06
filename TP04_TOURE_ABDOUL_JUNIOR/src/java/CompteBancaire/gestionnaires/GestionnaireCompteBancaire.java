@@ -25,15 +25,15 @@ public class GestionnaireCompteBancaire {
     private EntityManager em;
 
     public void creerCompteBancaireDeTest() {
-        creeCompteBancaire(10000, "X001", "Lennon", "John");
-        creeCompteBancaire(100, "X002", "Mac Cartney", "Paul");
-        creeCompteBancaire(4000, "X003", "Starr", "Ringo");
-        creeCompteBancaire(0, "X004", "Harisson", "Georges");
+        creeCompteBancaire(10000, "C001", "SEKE", "YED");
+        creeCompteBancaire(100, "E002", "KOUDIO", "ABEL");
+        creeCompteBancaire(4000, "X003", "ASSI", "MAUREL");
+        creeCompteBancaire(0, "P004", "KARIMOU", "YANNICK");
     }
 //final double balance, final String accountNumber, final String lastname, final String firstname
 
-    public CompteBancaire creeCompteBancaire(double balance, String accountNumber, String lastname, String firstname) {
-        CompteBancaire u = new CompteBancaire(balance, accountNumber, lastname, firstname);
+    public CompteBancaire creeCompteBancaire(double balance, String accountNumber, String firstname, String lastname) {
+        CompteBancaire u = new CompteBancaire(balance, accountNumber, firstname, lastname);
         em.persist(u);
         return u;
     }

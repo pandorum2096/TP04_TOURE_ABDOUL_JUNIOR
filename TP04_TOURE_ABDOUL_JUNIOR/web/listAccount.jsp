@@ -14,61 +14,59 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Gestionnaire des comptes bancaires</title>
+        <title>listAccount</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     </head>
-    <body>
-        <h1>Gestionnaire des comptes bancaires</h1>
+    <body style="text-align: center;">
+
+        <div class="alert alert-success" role="alert">
+            <h1>Gestionnaire des comptes bancaires</h1>
+        </div>
 
 
-        <!-- Message qui s'affiche lorsque la page est appelé avec un paramètre http message -->
-        <c:if test="${!empty param['message']}">
-            <h2>Reçu message : ${param.message}</h2>
-        </c:if>
 
 
-        <h2>Menu de gestion des comptes bancaires</h2>
-        <ul>
-            <li><a href="ServletUsers?action=listerLesUtilisateurs">Afficher/raffraichir la liste de tous les utilisateurs</a></li>
-            
-            <li><a href="ServletUsers?action=creerCompteBancaireDeTest">Créer 4 utilisateurs de test</a></li>
-            
-            <li><a href="newAccount.jsp">voir la page de creation d'un compte bancaire</a></li>
-        </ul>
-
+        <div class="list-group" style="width: 900px; margin-left: 20%;">
+            <a href="#" class="list-group-item list-group-item-action active">
+                <h3>Menu de gestion des comptes bancaires</h1>
+            </a>
+            <a href="ServletUsers?action=listerLesUtilisateurs" class="list-group-item list-group-item-action">Afficher/raffraichir la liste de tous les comptes bancaires</a>
+            <a href="ServletUsers?action=creerCompteBancaireDeTest" class="list-group-item list-group-item-action">Créer 4 utilisateurs de test</a>
+            <a href="newAccount.jsp" class="list-group-item list-group-item-action">voir la page de creation d'un compte bancaire</a>
+        </div>
         <!-- Fin du menu -->
 
-        <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->
-       
-            <h2>Lister tous les comptes bancaires</h2>
+        <table border="10" style="text-align: center; margin-left: 20%; margin-top: 10%; width: 900px">
+            <!-- La ligne de titre du tableau des comptes -->
+            <tr>
+                <td><b>balance</b></td>
+                <td><b>accountNumber</b></td>
+                <td><b>Nom</b></td>
+                <td><b>Prénom</b></td>
+            </tr>
 
-            <table border="10">
-                <!-- La ligne de titre du tableau des comptes -->
+            <!-- Ici on affiche les lignes, une par utilisateur -->
+            <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->
+            <c:set var="total" value="0"/>
+
+            <c:forEach var="u" items="${requestScope['listeDesUsers']}">
                 <tr>
-                    <td><b>balance</b></td>
-                    <td><b>accountNumber</b></td>
-                    <td><b>Nom</b></td>
-                    <td><b>Prénom</b></td>
+                    <td>${u.balance}</td>
+                    <td>${u.accountNumber}</td>
+                    <td>${u.firstname}</td>
+                    <td>${u.lastname}</td>
+                    <!-- On compte le nombre de users -->
+                    <c:set var="total" value="${total+1}"/>
                 </tr>
+            </c:forEach>
 
-                <!-- Ici on affiche les lignes, une par utilisateur -->
-                <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->
-                <c:set var="total" value="0"/>
+            <!-- Affichage du solde total dans la dernière ligne du tableau -->
+            <tr><td><b>TOTAL</b></td><td></td><td><b></b></td><td>${total}</td></tr>
+        </table>
 
-                <c:forEach var="u" items="${requestScope['listeDesUsers']}">
-                    <tr>
-                        <td>${u.balance}</td>
-                        <td>${u.accountNumber}</td>
-                        <td>${u.firstname}</td>
-                        <td>${u.lastname}</td>
-                        <!-- On compte le nombre de users -->
-                        <c:set var="total" value="${total+1}"/>
-                    </tr>
-                </c:forEach>
-
-                <!-- Affichage du solde total dans la dernière ligne du tableau -->
-                <tr><td><b>TOTAL</b></td><td></td><td><b></b></td><td>${total}</td></tr>
-            </table>
-
-        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
